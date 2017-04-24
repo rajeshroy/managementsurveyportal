@@ -2,7 +2,7 @@
 	"_version": "1.2.0",
 	"sap.app": {
 		"_version": "1.2.0",
-		"id": "man.survey.portal",
+		"id": "mana.survey.portal",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"title": "{{appTitle}}",
@@ -12,7 +12,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/sap/opu/odata/sap/ZCUST_FEEDBACK_SRV/",
+				"uri": "/here/goes/your/serviceurl/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -46,10 +46,10 @@
 			"sap_belize"
 		]
 	},
-	"sap.ui5": { 
+	"sap.ui5": {
 		"_version": "1.2.0",
 		"rootView": {
-			"viewName": "man.survey.portal.view.App",
+			"viewName": "mana.survey.portal.view.App",
 			"type": "XML",
 			"id": "app"
 		},
@@ -78,7 +78,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "man.survey.portal.i18n.i18n"
+					"bundleName": "mana.survey.portal.i18n.i18n"
 				}
 			},
 			"": {
@@ -94,7 +94,7 @@
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
-				"viewPath": "man.survey.portal.view",
+				"viewPath": "mana.survey.portal.view",
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {
@@ -113,7 +113,7 @@
 					]
 				},
 				{
-					"pattern": "ManagerFeedbackSet/{objectId}",
+					"pattern": "CustomerDetSet/{objectId}",
 					"name": "object",
 					"target": [
 						"object"

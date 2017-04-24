@@ -1,6 +1,6 @@
 sap.ui.define([
-		"man/survey/portal/controller/Worklist.controller",
-		"man/survey/portal/controller/BaseController",
+		"mana/survey/portal/controller/Worklist.controller",
+		"mana/survey/portal/controller/BaseController",
 		"sap/ui/base/ManagedObject",
 		"test/unit/helper/FakeI18nModel",
 		"sap/ui/thirdparty/sinon",

@@ -2,8 +2,8 @@ sap.ui.define([
 		"sap/ui/test/Opa5",
 		"sap/ui/test/actions/Press",
 		"sap/ui/test/matchers/PropertyStrictEquals",
-		"man/survey/portal/test/integration/pages/Common",
-		"man/survey/portal/test/integration/pages/shareOptions"
+		"mana/survey/portal/test/integration/pages/Common",
+		"mana/survey/portal/test/integration/pages/shareOptions"
 	], function(Opa5, Press, PropertyStrictEquals, Common, shareOptions) {
 		"use strict";
 
@@ -101,13 +101,6 @@ sap.ui.define([
 							},
 							errorMessage : "The object view's busy indicator delay is still zero."
 						});
-					},
-
-					theObjectViewShouldContainOnlyFormattedUnitNumbers : function () {
-						return this.theUnitNumbersShouldHaveTwoDecimals("sap.m.ObjectHeader",
-							sViewName,
-							"Object header are properly formatted",
-							"Object view has no entries which can be checked for their formatting");
 					},
 
 					theShareTileButtonShouldContainTheRememberedObjectName : function () {

@@ -1,9 +1,9 @@
 /*global location*/
 sap.ui.define([
-		"man/survey/portal/controller/BaseController",
+		"mana/survey/portal/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
-		"man/survey/portal/model/formatter"
+		"mana/survey/portal/model/formatter"
 	], function (
 		BaseController,
 		JSONModel,
@@ -12,7 +12,7 @@ sap.ui.define([
 	) {
 		"use strict";
 
-		return BaseController.extend("man.survey.portal.controller.Object", {
+		return BaseController.extend("mana.survey.portal.controller.Object", {
 
 			formatter: formatter,
 
@@ -50,23 +50,6 @@ sap.ui.define([
 			/* event handlers                                              */
 			/* =========================================================== */
 
-			/**
-			 * Event handler when the share in JAM button has been clicked
-			 * @public
-			 */
-			onShareInJamPress : function () {
-				var oViewModel = this.getModel("objectView"),
-					oShareDialog = sap.ui.getCore().createComponent({
-						name: "sap.collaboration.components.fiori.sharing.dialog",
-						settings: {
-							object:{
-								id: location.href,
-								share: oViewModel.getProperty("/shareOnJamTitle")
-							}
-						}
-					});
-				oShareDialog.open();
-			},
 
 
 			/* =========================================================== */
@@ -81,69 +64,9 @@ sap.ui.define([
 			 */
 			_onObjectMatched : function (oEvent) {
 				var sObjectId =  oEvent.getParameter("arguments").objectId;
-				this.getModel().metadataLoaded().then( function() {
-					/*var sObjectPath = this.getModel().createKey("ManagerFeedbackSet", {
-						 :  sObjectId
-					});*/
-					this._bindView("/" + sObjectPath);
-				}.bind(this));
-			},
-
-			/**
-			 * Binds the view to the object path.
-			 * @function
-			 * @param {string} sObjectPath path to the object to be bound
-			 * @private
-			 */
-			_bindView : function (sObjectPath) {
-				var oViewModel = this.getModel("objectView"),
-					oDataModel = this.getModel();
-
-				this.getView().bindElement({
-					path: sObjectPath,
-					events: {
-						change: this._onBindingChange.bind(this),
-						dataRequested: function () {
-							oDataModel.metadataLoaded().then(function () {
-								// Busy indicator on view should only be set if metadata is loaded,
-								// otherwise there may be two busy indications next to each other on the
-								// screen. This happens because route matched handler already calls '_bindView'
-								// while metadata is loaded.
-								oViewModel.setProperty("/busy", true);
-							});
-						},
-						dataReceived: function () {
-							oViewModel.setProperty("/busy", false);
-						}
-					}
-				});
-			},
-
-			_onBindingChange : function () {
-				var oView = this.getView(),
-				//	oViewModel = this.getModel("objectView"),
-					oElementBinding = oView.getElementBinding();
-
-				// No data for the binding
-				if (!oElementBinding.getBoundContext()) {
-					this.getRouter().getTargets().display("objectNotFound");
-					return;
-				}
-
-				/*var oResourceBundle = this.getResourceBundle(),
-					oObject = oView.getBindingContext().getObject(),
-					sObjectId = oObject.,
-					sObjectName = oObject.;
-
-				// Everything went fine.
-				oViewModel.setProperty("/busy", false);
-				oViewModel.setProperty("/saveAsTileTitle", oResourceBundle.getText("saveAsTileTitle", [sObjectName]));
-				oViewModel.setProperty("/shareOnJamTitle", sObjectName);
-				oViewModel.setProperty("/shareSendEmailSubject",
-				oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-				oViewModel.setProperty("/shareSendEmailMessage",
-				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));*/
+				
 			}
+			
 
 		});
 

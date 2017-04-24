@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="man.survey.portal.controller.Object"
+	controllerName="mana.survey.portal.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
@@ -7,7 +7,7 @@
 
 	<semantic:FullscreenPage
 		id="page"
-        
+        semanticRuleSet="Optimized"
 		title="{i18n>objectTitle}"
 		busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
@@ -15,11 +15,7 @@
 		<semantic:content>
 			<ObjectHeader
 				id="objectHeader"
-				title="{}"
-				number="{
-							path: 'FeedbackRating',
-							formatter: '.formatter.numberUnit'
-				}"
+				title="{Land1}"
 >
 			</ObjectHeader>
  		</semantic:content>

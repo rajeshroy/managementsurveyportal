@@ -1,83 +1,27 @@
 <mvc:View
-	controllerName="man.survey.portal.controller.Worklist"
+	controllerName="mana.survey.portal.controller.Worklist"
 	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
 	xmlns:footerbar="sap.ushell.ui.footerbar">
 
 	<semantic:FullscreenPage
 		id="page"
-        title="{i18n>worklistViewTitle}">
+        semanticRuleSet="Optimized"
+		title="{i18n>worklistViewTitle}">
 		<semantic:content>
-			<Table
-				id="table"
-				width="auto"
-				class="sapUiResponsiveMargin"
-				items="{
-					path: '/ManagerFeedbackSet',
-					sorter: {
-						path: '',
-						descending: false
-					}
-				}"
-				noDataText="{worklistView>/tableNoDataText}"
-				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-				growing="true"
-				growingScrollToLoad="true"
-				updateFinished="onUpdateFinished">
-
-				<headerToolbar>
-					<Toolbar>
-						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
-						<ToolbarSpacer />
-						<SearchField
-							id="searchField"
-							tooltip="{i18n>worklistSearchTooltip}"
-							search="onSearch"
-							width="auto">
-						</SearchField>
-					</Toolbar>
-				</headerToolbar>
-
-				<columns>
-					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
-					</Column>
-					<Column id="unitNumberColumn" hAlign="End">
-						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
-					</Column>
-				</columns>
-
-				<items>
-					<ColumnListItem
-						type="Navigation"
-						press="onPress">
-						<cells>
-							<ObjectIdentifier
-								title="{}"/>
-							<ObjectNumber
-								number="{
-									path: 'FeedbackRating',
-									formatter: '.formatter.numberUnit'
-								}"/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
+			<Select id="managCustID"
+					forceSelection="false"
+					selectedKey="{/CustomerDetSet/0/kunnr}"
+					items="{
+						path: '/CustomerDetSet',
+						sorter: { path: 'Name1' }
+					}">
+					<core:Item key="{Kunnr}" text="{Name1}" />
+				</Select>
+			<Button text="{i18n>worklistGo}" press="onGoPress"/>
 		</semantic:content>
-
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
-
-		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton id ="shareTile" title="{worklistView>/saveAsTileTitle}" />
-		</semantic:saveAsTileAction>
-
 	</semantic:FullscreenPage>
 
 </mvc:View>

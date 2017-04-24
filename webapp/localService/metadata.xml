@@ -112,9 +112,9 @@
                 <EntitySet Name="QuestionDetSet" EntityType="ZCUST_FEEDBACK_SRV.QuestionDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
             </EntityContainer>
             <atom:link
-                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZCUST_FEEDBACK_SRV/$metadata"/>
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://sap03server.triconhome.local:8010/sap/opu/odata/sap/ZCUST_FEEDBACK_SRV/$metadata"/>
                 <atom:link
-                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZCUST_FEEDBACK_SRV/$metadata"/>
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://sap03server.triconhome.local:8010/sap/opu/odata/sap/ZCUST_FEEDBACK_SRV/$metadata"/>
                 </Schema>
             </edmx:DataServices>
         </edmx:Edmx>

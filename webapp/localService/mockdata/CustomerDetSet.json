@@ -1,0 +1,43 @@
+[{
+	"Mandt": "001",
+	"Kunnr": "0000000001",
+	"Land1": "IN",
+	"Name1": "SAP",
+	"Ort01": "Bangalore",
+	"Pstlz": "560036",
+	"Regio": "Karnataka",
+	"Stras": "#4, whitefield",
+	"Telf1": " 080 4329 4328"
+}, {
+	"Mandt": "001",
+	"Kunnr": "0000000002",
+	"Land1": "IN",
+	"Name1": "Walmart",
+	"Name2": "",
+	"Ort01": "Bangalore",
+	"Pstlz": "560034",
+	"Regio": "Karnataka",
+	"Stras": "#2, kormangala",
+	"Telf1": "08043294329",
+	"Telfx": "Telfx 1",
+	"__metadata": {
+		"uri": "CustomerDetSet(Mandt='Mandt%201',Kunnr='Kunnr%201')",
+		"type": "ZCUST_FEEDBACK_SRV.CustomerDet"
+	}
+}, {
+	"Mandt": "001",
+	"Kunnr": "0000000003",
+	"Land1": "Bangalore",
+	"Name1": "Sigma",
+	"Name2": "",
+	"Ort01": "Bangalore",
+	"Pstlz": "560035",
+	"Regio": "Karnataka",
+	"Stras": "#3, BTM",
+	"Telf1": " 080 4329 4325",
+	"Telfx": "Telfx 2",
+	"__metadata": {
+		"uri": "CustomerDetSet(Mandt='Mandt%202',Kunnr='Kunnr%202')",
+		"type": "ZCUST_FEEDBACK_SRV.CustomerDet"
+	}
+}]

@@ -1,5 +1,5 @@
 sap.ui.define([
-		"man/survey/portal/model/models",
+		"mana/survey/portal/model/models",
 		"sap/ui/thirdparty/sinon",
 		"sap/ui/thirdparty/sinon-qunit"
 	], function (models) {

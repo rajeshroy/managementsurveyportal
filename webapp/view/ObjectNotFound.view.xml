@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="man.survey.portal.controller.NotFound"
+	controllerName="mana.survey.portal.controller.NotFound"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
 

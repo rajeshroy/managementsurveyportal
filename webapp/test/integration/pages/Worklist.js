@@ -5,8 +5,8 @@ sap.ui.define([
 		"sap/ui/test/matchers/AggregationLengthEquals",
 		"sap/ui/test/matchers/AggregationFilled",
 		"sap/ui/test/matchers/PropertyStrictEquals",
-		"man/survey/portal/test/integration/pages/Common",
-		"man/survey/portal/test/integration/pages/shareOptions"
+		"mana/survey/portal/test/integration/pages/Common",
+		"mana/survey/portal/test/integration/pages/shareOptions"
 	], function(Opa5, Press, EnterText,AggregationLengthEquals, AggregationFilled, PropertyStrictEquals, Common, shareOptions) {
 		"use strict";
 
@@ -65,8 +65,8 @@ sap.ui.define([
 								// Don't remember objects just strings since IE will not allow accessing objects of destroyed frames
 								this.getContext().currentItem = {
 									bindingPath: oBindingContext.getPath(),
-									id: oBindingContext.getProperty(""),
-									name: oBindingContext.getProperty("")
+									id: oBindingContext.getProperty("Kunnr"),
+									name: oBindingContext.getProperty("Land1")
 								};
 							}
 						}));
@@ -215,9 +215,9 @@ sap.ui.define([
 						var aAllEntities,
 							iExpectedNumberOfItems;
 
-						// retrieve all ManagerFeedbackSet to be able to check for the total amount
+						// retrieve all CustomerDetSet to be able to check for the total amount
 						this.waitFor(this.createAWaitForAnEntitySet({
-							entitySet: "ManagerFeedbackSet",
+							entitySet: "CustomerDetSet",
 							success: function (aEntityData) {
 								aAllEntities = aEntityData;
 							}
@@ -277,13 +277,6 @@ sap.ui.define([
 							},
 							errorMessage : "Table does not have the double amount of entries."
 						});
-					},
-
-					theTableShouldContainOnlyFormattedUnitNumbers : function () {
-						return this.theUnitNumbersShouldHaveTwoDecimals("sap.m.ObjectNumber",
-							sViewName,
-							"Object numbers are properly formatted",
-							"Table has no entries which can be checked for their formatting");
 					},
 
 					iShouldSeeTheWorklistViewsBusyIndicator : function () {

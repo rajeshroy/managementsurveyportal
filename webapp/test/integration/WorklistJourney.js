@@ -14,7 +14,6 @@ sap.ui.define([
 
 			// Assertions
 			Then.onTheWorklistPage.theTableShouldHaveAllEntries().
-				and.theTableShouldContainOnlyFormattedUnitNumbers().
 				and.theTitleShouldDisplayTheTotalAmountOfItems();
 		});
 

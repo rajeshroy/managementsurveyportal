@@ -1,5 +1,5 @@
 sap.ui.define([
-		"man/survey/portal/model/formatter"
+		"mana/survey/portal/model/formatter"
 	], function (formatter) {
 		"use strict";
 

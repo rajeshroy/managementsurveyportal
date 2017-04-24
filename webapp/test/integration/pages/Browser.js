@@ -1,6 +1,6 @@
 sap.ui.define([
 		"sap/ui/test/Opa5",
-		"man/survey/portal/test/integration/pages/Common"
+		"mana/survey/portal/test/integration/pages/Common"
 	], function(Opa5, Common) {
 		"use strict";
 
@@ -40,7 +40,7 @@ sap.ui.define([
 						return this.waitFor({
 							success : function () {
 								var sObjectId = this.getContext().currentItem.id;
-								Opa5.getHashChanger().setHash("/ManagerFeedbackSet/" + sObjectId);
+								Opa5.getHashChanger().setHash("/CustomerDetSet/" + sObjectId);
 							}
 						});
 					},
@@ -56,7 +56,7 @@ sap.ui.define([
 
 						return this.waitFor({
 							success : function() {
-								oOptions.hash = "/ManagerFeedbackSet/" + encodeURIComponent(sObjectId);
+								oOptions.hash = "/CustomerDetSet/" + encodeURIComponent(sObjectId);
 								this.iStartMyApp(oOptions);
 							}
 						});

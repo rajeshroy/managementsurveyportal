@@ -19,8 +19,7 @@ sap.ui.define([
 			// Assertions
 			Then.onTheObjectPage.iShouldSeeTheObjectViewsBusyIndicator().
 				and.theObjectViewsBusyIndicatorDelayIsRestored().
-				and.iShouldSeeTheRememberedObject().
-				and.theObjectViewShouldContainOnlyFormattedUnitNumbers();
+				and.iShouldSeeTheRememberedObject();
 		});
 
 		opaTest("Should open the share menu and display the share buttons", function (Given, When, Then) {

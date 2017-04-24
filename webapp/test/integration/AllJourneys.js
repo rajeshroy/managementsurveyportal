@@ -5,26 +5,26 @@ QUnit.config.autostart = false;
 
 sap.ui.require([
 		"sap/ui/test/Opa5",
-		"man/survey/portal/test/integration/pages/Common",
+		"mana/survey/portal/test/integration/pages/Common",
 		"sap/ui/test/opaQunit",
-		"man/survey/portal/test/integration/pages/Worklist",
-		"man/survey/portal/test/integration/pages/Object",
-		"man/survey/portal/test/integration/pages/NotFound",
-		"man/survey/portal/test/integration/pages/Browser",
-		"man/survey/portal/test/integration/pages/App"
+		"mana/survey/portal/test/integration/pages/Worklist",
+		"mana/survey/portal/test/integration/pages/Object",
+		"mana/survey/portal/test/integration/pages/NotFound",
+		"mana/survey/portal/test/integration/pages/Browser",
+		"mana/survey/portal/test/integration/pages/App"
 	], function (Opa5, Common) {
 	"use strict";
 	Opa5.extendConfig({
 		arrangements: new Common(),
-		viewNamespace: "man.survey.portal.view."
+		viewNamespace: "mana.survey.portal.view."
 	});
 
 	sap.ui.require([
-		"man/survey/portal/test/integration/WorklistJourney",
-		"man/survey/portal/test/integration/ObjectJourney",
-		"man/survey/portal/test/integration/NavigationJourney",
-		"man/survey/portal/test/integration/NotFoundJourney",
-		"man/survey/portal/test/integration/FLPIntegrationJourney"
+		"mana/survey/portal/test/integration/WorklistJourney",
+		"mana/survey/portal/test/integration/ObjectJourney",
+		"mana/survey/portal/test/integration/NavigationJourney",
+		"mana/survey/portal/test/integration/NotFoundJourney",
+		"mana/survey/portal/test/integration/FLPIntegrationJourney"
 	], function () {
 		QUnit.start();
 	});

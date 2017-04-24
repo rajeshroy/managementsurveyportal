@@ -1,5 +1,5 @@
 sap.ui.define([
-		"man/survey/portal/controller/App.controller",
+		"mana/survey/portal/controller/App.controller",
 		"sap/ui/core/Control",
 		"sap/ui/core/mvc/Controller",
 		"sap/ui/model/json/JSONModel",
