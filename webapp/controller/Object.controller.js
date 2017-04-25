@@ -46,7 +46,7 @@ sap.ui.define([
 					busy: true,
 					delay: 0
 				}),
-			oLocalJSONModel = new JSONModel(); 
+				oLocalJSONModel = new JSONModel();
 			this.setModel(oLocalJSONModel, "customerModel");
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
@@ -115,26 +115,48 @@ sap.ui.define([
 		 * Call back function used to handle the success of read call 
 		 * @param {oSuccess} Success data
 		 */
-		 successCustomerDataLoad: function(oSuccess){
-		 	var oModelData = oSuccess.results;
-			this.getModel("customerModel").setProperty("/", oModelData);
+		successCustomerDataLoad: function(oSuccess) {
+			var aEmpty = [],
+				oModelData = oSuccess.results;
+			for (var i = 0; i < oModelData.length; i++) {
+				var oEmpty = {};
+				if (aEmpty.length === 0) {
+					oEmpty.FeedbackAvgFd = oModelData[i].FeedbackAvgFd;
+					oEmpty.projectCount = 1;
+					aEmpty.push(oEmpty);
+				} else {
+					for (var j = 0; j < aEmpty.length; j++) {
+						var bCheck = false;
+						if (aEmpty[j].FeedbackAvgFd === oModelData[i].FeedbackAvgFd) {
+							aEmpty[j].projectCount += 1;
+							bCheck = true;
+							break;
+						}
+					}
+					if(!bCheck){
+						 	oEmpty.FeedbackAvgFd = oModelData[i].FeedbackAvgFd;
+							oEmpty.projectCount = 1;
+							aEmpty.push(oEmpty);
+					}
+				}
+			}
+			this.getModel("customerModel").setProperty("/", aEmpty);
 			var oDataset, oModel = this.getModel("customerModel"),
-			getview = this.getView().byId("idpiechart"),
-			oVizFrame = this.getView().byId("idpiechart");
 
+				oVizFrame = this.getView().byId("idpiechart");
 			oDataset = new sap.viz.ui5.data.FlattenedDataset({
-
 				dimensions: [{
 					name: 'Rating',
 					value: "{FeedbackAvgFd}"
 				}],
 
 				measures: [{
-					name: 'ProjectId',
-					value: '{Projectid}'
+					name: 'Project',
+					value: '{projectCount}'
 				}],
+
 				data: {
-					path:"/"
+					path: "/"
 				}
 			});
 			oVizFrame.setDataset(oDataset);
@@ -153,7 +175,7 @@ sap.ui.define([
 			var feedSize = new sap.viz.ui5.controls.common.feeds.FeedItem({
 					'uid': "size",
 					'type': "Measure",
-					'values': ["ProjectId"]
+					'values': ["Project"]
 				}),
 				feedColor = new sap.viz.ui5.controls.common.feeds.FeedItem({
 					'uid': "color",
@@ -162,15 +184,15 @@ sap.ui.define([
 				});
 			oVizFrame.addFeed(feedSize);
 			oVizFrame.addFeed(feedColor);
-			
-		 },
-		 /**
+
+		},
+		/**
 		 * Call back function used to handle the success of read call 
 		 * @param {oError} Success data
 		 */
-		 errorCustomerDataLoad: function(oError){
-				
-		 },
+		errorCustomerDataLoad: function(oError) {
+
+		},
 		/**
 		 * function to return filter array
 		 * @param {string} sCompanyId Company Id
