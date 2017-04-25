@@ -2,12 +2,20 @@
 sap.ui.define([
 		"mana/survey/portal/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
+		'sap/m/Button',
+	      'sap/m/Dialog',
+	      'sap/m/Link',
+	      'sap/m/Text',
 		"sap/ui/core/routing/History",
 		"mana/survey/portal/model/formatter"
 	], function (
 		BaseController,
 		JSONModel,
 		History,
+		Button,
+		Dialog,
+		Link, 
+		Text, 
 		formatter
 	) {
 		"use strict";
@@ -25,6 +33,7 @@ sap.ui.define([
 			 * @public
 			 */
 			onInit : function () {
+				
 				// Model used to manipulate control states. The chosen values make sure,
 				// detail page is busy indication immediately so there is no break in
 				// between the busy indication for loading the view's meta data
@@ -44,7 +53,80 @@ sap.ui.define([
 						oViewModel.setProperty("/delay", iOriginalBusyDelay);
 					}
 				);
+				
+				var newModel = sap.ui.getCore().getModel("newModel");
+
+		var getview = this.getView().byId("idpiechart");
+		
+		var oVizFrame = this.getView().byId("idpiechart");
+   
+		var oDataset = new sap.viz.ui5.data.FlattenedDataset({
+			
+			
+		
+			dimensions : [{	
+				    name : 'Rating',
+					value : "{FeedbackAvgFd}"}],
+					
+		    measures : [{
+			    name : 'ProjectId',
+				value : '{Projectid}'} ],
+				
+				data : {
+					path :"/CustAvgFeedbackSet"
+				}
+		    });		
+		oVizFrame.setDataset(oDataset);
+		oVizFrame.setModel(newModel);	
+		oVizFrame.setVizProperties({
+			
+			title:{
+				text : "Report"
 			},
+            plotArea: {
+            	colorPalette : d3.scale.category20().range(),
+            	drawingEffect: "glossy"
+                }});
+		
+		var feedSize = new sap.viz.ui5.controls.common.feeds.FeedItem({
+		      'uid': "size",
+		      'type': "Measure",
+				'values': ["ProjectId"]
+		    }), 
+		    feedColor = new sap.viz.ui5.controls.common.feeds.FeedItem({
+		      'uid': "color",
+		      'type': "Dimension",
+				'values': ["Rating"]
+		    });
+		oVizFrame.addFeed(feedSize);
+		oVizFrame.addFeed(feedColor);
+	
+				
+			},
+			
+				onPress: function (oEvent) {
+	
+		var dialog = new Dialog({
+			title: 'Go to the link',
+			
+				content: new Link({
+					text: "Google",
+					href:""
+				}),
+			beginButton: new Button({
+				text: 'Cancel',
+				press: function () {
+					dialog.close();
+				}
+			}),
+			afterClose: function() {
+				dialog.destroy();
+			}
+		});
+
+		dialog.open();
+
+},
 
 			/* =========================================================== */
 			/* event handlers                                              */
@@ -63,7 +145,7 @@ sap.ui.define([
 			 * @private
 			 */
 			_onObjectMatched : function (oEvent) {
-				var sObjectId =  oEvent.getParameter("arguments").objectId;
+				 var sObjectId =  oEvent.getParameter("arguments").objectId;
 				
 			}
 			

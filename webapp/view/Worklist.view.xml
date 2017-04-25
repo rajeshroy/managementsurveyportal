@@ -11,6 +11,8 @@
         semanticRuleSet="Optimized"
 		title="{i18n>worklistViewTitle}">
 		<semantic:content>
+			
+			
 			<Select id="managCustID"
 					forceSelection="false"
 					selectedKey="{/CustomerDetSet/0/kunnr}"

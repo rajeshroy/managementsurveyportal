@@ -1,0 +1,69 @@
+[{
+	"Mandt": "001",
+	"Managerid": "Managerid 1",
+	"Projectid": "P01",
+	"Customerid": "0000000001",
+	"FeedbackDate": "/Date(1492885800000)/",
+	"FeedbackAvgFd": 60,
+	"FeedbackDesc": "FeedbackDesc 1",
+	"__metadata": {
+		"uri": "CustAvgFeedbackSet(Mandt='Mandt%201',Managerid='Managerid%201',Projectid='Projectid%201',Customerid='Customerid%201',FeedbackDate=datetime'2010-04-09T06%3A35%3A07')",
+		"type": "ZCUST_FEEDBACK_SRV.CustAvgFeedback"
+	},
+	"CustFeedbackSet": {
+		"__deferred": {
+			"uri": "CustAvgFeedbackSet(Mandt='Mandt%201',Managerid='Managerid%201',Projectid='Projectid%201',Customerid='Customerid%201',FeedbackDate=datetime'2010-04-09T06%3A35%3A07')/CustFeedbackSet"
+		}
+	}
+}, {
+	"Mandt": "001",
+	"Managerid": "Managerid 2",
+	"Projectid": "Projectid 2",
+	"Customerid": "0000000002",
+	"FeedbackDate": "/Date(1476901800000)/",
+	"FeedbackAvgFd": 80,
+	"FeedbackDesc": "FeedbackDesc 2",
+	"__metadata": {
+		"uri": "CustAvgFeedbackSet(Mandt='Mandt%202',Managerid='Managerid%202',Projectid='Projectid%202',Customerid='Customerid%202',FeedbackDate=datetime'2004-12-14T06%3A35%3A07')",
+		"type": "ZCUST_FEEDBACK_SRV.CustAvgFeedback"
+	},
+	"CustFeedbackSet": {
+		"__deferred": {
+			"uri": "CustAvgFeedbackSet(Mandt='Mandt%202',Managerid='Managerid%202',Projectid='Projectid%202',Customerid='Customerid%202',FeedbackDate=datetime'2004-12-14T06%3A35%3A07')/CustFeedbackSet"
+		}
+	}
+}, {
+	"Mandt": "001",
+	"Managerid": "Managerid 3",
+	"Projectid": "Projectid 3",
+	"Customerid": "0000000003",
+	"FeedbackDate": "/Date(1421951400000)/",
+	"FeedbackAvgFd": 5126.83,
+	"FeedbackDesc": "FeedbackDesc 3",
+	"__metadata": {
+		"uri": "CustAvgFeedbackSet(Mandt='Mandt%203',Managerid='Managerid%203',Projectid='Projectid%203',Customerid='Customerid%203',FeedbackDate=datetime'2014-02-20T06%3A35%3A07')",
+		"type": "ZCUST_FEEDBACK_SRV.CustAvgFeedback"
+	},
+	"CustFeedbackSet": {
+		"__deferred": {
+			"uri": "CustAvgFeedbackSet(Mandt='Mandt%203',Managerid='Managerid%203',Projectid='Projectid%203',Customerid='Customerid%203',FeedbackDate=datetime'2014-02-20T06%3A35%3A07')/CustFeedbackSet"
+		}
+	}
+}, {
+	"Mandt": "001",
+	"Managerid": "Managerid 4",
+	"Projectid": "Projectid 4",
+	"Customerid": "0000000004",
+	"FeedbackDate": "/Date(1404239400000)/",
+	"FeedbackAvgFd": 2651.39,
+	"FeedbackDesc": "FeedbackDesc 4",
+	"__metadata": {
+		"uri": "CustAvgFeedbackSet(Mandt='Mandt%204',Managerid='Managerid%204',Projectid='Projectid%204',Customerid='Customerid%204',FeedbackDate=datetime'2002-08-12T06%3A35%3A07')",
+		"type": "ZCUST_FEEDBACK_SRV.CustAvgFeedback"
+	},
+	"CustFeedbackSet": {
+		"__deferred": {
+			"uri": "CustAvgFeedbackSet(Mandt='Mandt%204',Managerid='Managerid%204',Projectid='Projectid%204',Customerid='Customerid%204',FeedbackDate=datetime'2002-08-12T06%3A35%3A07')/CustFeedbackSet"
+		}
+	}
+}]

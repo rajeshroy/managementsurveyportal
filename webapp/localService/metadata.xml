@@ -1,120 +1,274 @@
-<edmx:Edmx
-    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
-    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
-    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
-    <edmx:DataServices m:DataServiceVersion="2.0">
-        <Schema
-            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZCUST_FEEDBACK_SRV" xml:lang="en" sap:schema-version="1 ">
-            <EntityType Name="CustFeedback" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Mandt"/>
-                    <PropertyRef Name="Managerid"/>
-                    <PropertyRef Name="Projectid"/>
-                    <PropertyRef Name="Customerid"/>
-                    <PropertyRef Name="Questionid"/>
-                </Key>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Managerid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="manager id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Projectid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Customerid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Questionid" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Question ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FeedbackRating" Type="Edm.Int32" Nullable="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FeedbackDesc" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FeedbackDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="ProjectDet" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Mandt"/>
-                    <PropertyRef Name="ProjectId"/>
-                </Key>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ProjectId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ProjectName" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Project name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CustomerId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Team" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="team" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Divison" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ManagerId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="manager id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Validfrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Start Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Validto" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="End Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Project status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="PersonDet" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Mandt"/>
-                    <PropertyRef Name="Personid"/>
-                    <PropertyRef Name="ProjectId"/>
-                </Key>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Personid" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Personnel No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ProjectId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PersonName" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Name 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PersonType" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Person type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PersonExist" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Person Existance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PersonFrom" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Person From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Emaiid" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PhoneNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PHONE NUMBER" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Project status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ValidFrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Start Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ValidTo" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="End Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="CustomerDet" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Mandt"/>
-                    <PropertyRef Name="Kunnr"/>
-                </Key>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Land1" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ort01" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Pstlz" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Regio" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="State" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Stras" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Telf1" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Telephone 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Telfx" Type="Edm.String" Nullable="false" MaxLength="31" sap:label="Fax Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="VendorDet" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Mandt"/>
-                    <PropertyRef Name="Lifnr"/>
-                </Key>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Vendor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Land1" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name3" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name4" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ort01" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ort02" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="District" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Pfach" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PO Box" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Pstl2" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PO Box PCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Pstlz" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Regio" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="State" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Stras" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="QuestionDet" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Mandt"/>
-                    <PropertyRef Name="QuestionId"/>
-                </Key>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="QuestionId" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Question ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="QuestionText" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Question" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityContainer Name="ZCUST_FEEDBACK_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-                <EntitySet Name="CustFeedbackSet" EntityType="ZCUST_FEEDBACK_SRV.CustFeedback" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="ProjectDetSet" EntityType="ZCUST_FEEDBACK_SRV.ProjectDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="PersonDetSet" EntityType="ZCUST_FEEDBACK_SRV.PersonDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="CustomerDetSet" EntityType="ZCUST_FEEDBACK_SRV.CustomerDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="VendorDetSet" EntityType="ZCUST_FEEDBACK_SRV.VendorDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="QuestionDetSet" EntityType="ZCUST_FEEDBACK_SRV.QuestionDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-            </EntityContainer>
-            <atom:link
-                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://sap03server.triconhome.local:8010/sap/opu/odata/sap/ZCUST_FEEDBACK_SRV/$metadata"/>
-                <atom:link
-                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://sap03server.triconhome.local:8010/sap/opu/odata/sap/ZCUST_FEEDBACK_SRV/$metadata"/>
-                </Schema>
-            </edmx:DataServices>
-        </edmx:Edmx>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+<edmx:DataServices m:DataServiceVersion="2.0">
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZCUST_FEEDBACK_SRV" xml:lang="en" sap:schema-version="1 ">
+<EntityType Name="CustFeedback" sap:content-version="1">
+<Key>
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Managerid"/>
+<PropertyRef Name="Projectid"/>
+<PropertyRef Name="Customerid"/>
+<PropertyRef Name="Questionid"/>
+</Key>
+<Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Managerid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="manager id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Projectid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Customerid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Questionid" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Question ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FeedbackRating" Type="Edm.Int32" Nullable="false" sap:label="Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FeedbackDesc" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FeedbackDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="ProjectDet" sap:content-version="1">
+<Key>
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="ProjectId"/>
+</Key>
+<Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ProjectId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ProjectName" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Project name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CustomerId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Team" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="team" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Divison" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ManagerId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="manager id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Validfrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Start Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Validto" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="End Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Project status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="CustFeedbackSet" Relationship="ZCUST_FEEDBACK_SRV.ProjDetToCustFeedback" FromRole="FromRole_ProjDetToCustFeedback" ToRole="ToRole_ProjDetToCustFeedback"/>
+</EntityType>
+<EntityType Name="PersonDet" sap:content-version="1">
+<Key>
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Personid"/>
+<PropertyRef Name="ProjectId"/>
+</Key>
+<Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Personid" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Personnel No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ProjectId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PersonName" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Name 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PersonType" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Person type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PersonExist" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Person Existance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PersonFrom" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Person From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Emaiid" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PhoneNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PHONE NUMBER" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Project status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ValidFrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Start Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ValidTo" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="End Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="ProjectDetSet" Relationship="ZCUST_FEEDBACK_SRV.PersonDetToProjectDet" FromRole="FromRole_PersonDetToProjectDet" ToRole="ToRole_PersonDetToProjectDet"/>
+<NavigationProperty Name="CustFeedbackSet" Relationship="ZCUST_FEEDBACK_SRV.PersonDetToCustFeedback" FromRole="FromRole_PersonDetToCustFeedback" ToRole="ToRole_PersonDetToCustFeedback"/>
+</EntityType>
+<EntityType Name="CustomerDet" sap:content-version="1">
+<Key>
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Kunnr"/>
+</Key>
+<Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Land1" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Ort01" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Pstlz" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Regio" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="State" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Stras" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Telf1" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Telephone 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Telfx" Type="Edm.String" Nullable="false" MaxLength="31" sap:label="Fax Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="CustFeedbackSet01" Relationship="ZCUST_FEEDBACK_SRV.CustDetToCustFeedback" FromRole="FromRole_CustDetToCustFeedback" ToRole="ToRole_CustDetToCustFeedback"/>
+<NavigationProperty Name="ProjectDetSet" Relationship="ZCUST_FEEDBACK_SRV.CustDetToProjectDet" FromRole="FromRole_CustDetToProjectDet" ToRole="ToRole_CustDetToProjectDet"/>
+</EntityType>
+<EntityType Name="VendorDet" sap:content-version="1">
+<Key>
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Lifnr"/>
+</Key>
+<Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Vendor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Land1" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name3" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name4" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Ort01" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Ort02" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="District" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Pfach" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PO Box" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Pstl2" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PO Box PCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Pstlz" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Regio" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="State" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Stras" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="QuestionDet" sap:content-version="1">
+<Key>
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="QuestionId"/>
+</Key>
+<Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="QuestionId" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Question ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="QuestionText" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Question" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="CustFeedbackSet" Relationship="ZCUST_FEEDBACK_SRV.QuestionDetToCustFeedback" FromRole="FromRole_QuestionDetToCustFeedback" ToRole="ToRole_QuestionDetToCustFeedback"/>
+</EntityType>
+<EntityType Name="CustAvgFeedback" sap:content-version="1">
+<Key>
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Managerid"/>
+<PropertyRef Name="Projectid"/>
+<PropertyRef Name="Customerid"/>
+<PropertyRef Name="FeedbackDate"/>
+</Key>
+<Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Managerid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="manager id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Projectid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Customerid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FeedbackDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FeedbackAvgFd" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="0" sap:label="Avg. Feedback" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FeedbackDesc" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="CustFeedbackSet" Relationship="ZCUST_FEEDBACK_SRV.CustAvgFeedbacktoCustFeedback" FromRole="FromRole_CustAvgFeedbacktoCustFeedback" ToRole="ToRole_CustAvgFeedbacktoCustFeedback"/>
+</EntityType>
+<Association Name="QuestionDetToCustFeedback" sap:content-version="1">
+<End Type="ZCUST_FEEDBACK_SRV.QuestionDet" Multiplicity="1" Role="FromRole_QuestionDetToCustFeedback"/>
+<End Type="ZCUST_FEEDBACK_SRV.CustFeedback" Multiplicity="*" Role="ToRole_QuestionDetToCustFeedback"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_QuestionDetToCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="QuestionId"/>
+</Principal>
+<Dependent Role="ToRole_QuestionDetToCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Questionid"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="PersonDetToCustFeedback" sap:content-version="1">
+<End Type="ZCUST_FEEDBACK_SRV.PersonDet" Multiplicity="1" Role="FromRole_PersonDetToCustFeedback"/>
+<End Type="ZCUST_FEEDBACK_SRV.CustFeedback" Multiplicity="*" Role="ToRole_PersonDetToCustFeedback"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_PersonDetToCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Personid"/>
+<PropertyRef Name="ProjectId"/>
+</Principal>
+<Dependent Role="ToRole_PersonDetToCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Managerid"/>
+<PropertyRef Name="Projectid"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="PersonDetToProjectDet" sap:content-version="1">
+<End Type="ZCUST_FEEDBACK_SRV.PersonDet" Multiplicity="1" Role="FromRole_PersonDetToProjectDet"/>
+<End Type="ZCUST_FEEDBACK_SRV.ProjectDet" Multiplicity="*" Role="ToRole_PersonDetToProjectDet"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_PersonDetToProjectDet">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Personid"/>
+<PropertyRef Name="ProjectId"/>
+</Principal>
+<Dependent Role="ToRole_PersonDetToProjectDet">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="ManagerId"/>
+<PropertyRef Name="ProjectId"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CustAvgFeedbacktoCustFeedback" sap:content-version="1">
+<End Type="ZCUST_FEEDBACK_SRV.CustAvgFeedback" Multiplicity="1" Role="FromRole_CustAvgFeedbacktoCustFeedback"/>
+<End Type="ZCUST_FEEDBACK_SRV.CustFeedback" Multiplicity="*" Role="ToRole_CustAvgFeedbacktoCustFeedback"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CustAvgFeedbacktoCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Managerid"/>
+<PropertyRef Name="Projectid"/>
+<PropertyRef Name="Customerid"/>
+<PropertyRef Name="FeedbackDate"/>
+</Principal>
+<Dependent Role="ToRole_CustAvgFeedbacktoCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Managerid"/>
+<PropertyRef Name="Projectid"/>
+<PropertyRef Name="Customerid"/>
+<PropertyRef Name="FeedbackDate"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CustDetToProjectDet" sap:content-version="1">
+<End Type="ZCUST_FEEDBACK_SRV.CustomerDet" Multiplicity="0..1" Role="FromRole_CustDetToProjectDet"/>
+<End Type="ZCUST_FEEDBACK_SRV.ProjectDet" Multiplicity="*" Role="ToRole_CustDetToProjectDet"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CustDetToProjectDet">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Kunnr"/>
+</Principal>
+<Dependent Role="ToRole_CustDetToProjectDet">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="CustomerId"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CustDetToCustFeedback" sap:content-version="1">
+<End Type="ZCUST_FEEDBACK_SRV.CustomerDet" Multiplicity="1" Role="FromRole_CustDetToCustFeedback"/>
+<End Type="ZCUST_FEEDBACK_SRV.CustFeedback" Multiplicity="*" Role="ToRole_CustDetToCustFeedback"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CustDetToCustFeedback">
+<PropertyRef Name="Kunnr"/>
+<PropertyRef Name="Mandt"/>
+</Principal>
+<Dependent Role="ToRole_CustDetToCustFeedback">
+<PropertyRef Name="Customerid"/>
+<PropertyRef Name="Mandt"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="ProjDetToCustFeedback" sap:content-version="1">
+<End Type="ZCUST_FEEDBACK_SRV.ProjectDet" Multiplicity="1" Role="FromRole_ProjDetToCustFeedback"/>
+<End Type="ZCUST_FEEDBACK_SRV.CustFeedback" Multiplicity="*" Role="ToRole_ProjDetToCustFeedback"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_ProjDetToCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="ProjectId"/>
+</Principal>
+<Dependent Role="ToRole_ProjDetToCustFeedback">
+<PropertyRef Name="Mandt"/>
+<PropertyRef Name="Projectid"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<EntityContainer Name="ZCUST_FEEDBACK_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+<EntitySet Name="CustFeedbackSet" EntityType="ZCUST_FEEDBACK_SRV.CustFeedback" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="ProjectDetSet" EntityType="ZCUST_FEEDBACK_SRV.ProjectDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="PersonDetSet" EntityType="ZCUST_FEEDBACK_SRV.PersonDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="CustomerDetSet" EntityType="ZCUST_FEEDBACK_SRV.CustomerDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="VendorDetSet" EntityType="ZCUST_FEEDBACK_SRV.VendorDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="QuestionDetSet" EntityType="ZCUST_FEEDBACK_SRV.QuestionDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="CustAvgFeedbackSet" EntityType="ZCUST_FEEDBACK_SRV.CustAvgFeedback" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<AssociationSet Name="CustDetToCustFeedbackSet" Association="ZCUST_FEEDBACK_SRV.CustDetToCustFeedback" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CustomerDetSet" Role="FromRole_CustDetToCustFeedback"/>
+<End EntitySet="CustFeedbackSet" Role="ToRole_CustDetToCustFeedback"/>
+</AssociationSet>
+<AssociationSet Name="PersonDetToCustFeedbackSet" Association="ZCUST_FEEDBACK_SRV.PersonDetToCustFeedback" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="PersonDetSet" Role="FromRole_PersonDetToCustFeedback"/>
+<End EntitySet="CustFeedbackSet" Role="ToRole_PersonDetToCustFeedback"/>
+</AssociationSet>
+<AssociationSet Name="CustAvgFeedbacktoCustFeedbackSet" Association="ZCUST_FEEDBACK_SRV.CustAvgFeedbacktoCustFeedback" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CustAvgFeedbackSet" Role="FromRole_CustAvgFeedbacktoCustFeedback"/>
+<End EntitySet="CustFeedbackSet" Role="ToRole_CustAvgFeedbacktoCustFeedback"/>
+</AssociationSet>
+<AssociationSet Name="QuestionDetToCustFeedbackSet" Association="ZCUST_FEEDBACK_SRV.QuestionDetToCustFeedback" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="QuestionDetSet" Role="FromRole_QuestionDetToCustFeedback"/>
+<End EntitySet="CustFeedbackSet" Role="ToRole_QuestionDetToCustFeedback"/>
+</AssociationSet>
+<AssociationSet Name="PersonDetToProjectDetSet" Association="ZCUST_FEEDBACK_SRV.PersonDetToProjectDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="PersonDetSet" Role="FromRole_PersonDetToProjectDet"/>
+<End EntitySet="ProjectDetSet" Role="ToRole_PersonDetToProjectDet"/>
+</AssociationSet>
+<AssociationSet Name="ProjDetToCustFeedbackSet" Association="ZCUST_FEEDBACK_SRV.ProjDetToCustFeedback" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="ProjectDetSet" Role="FromRole_ProjDetToCustFeedback"/>
+<End EntitySet="CustFeedbackSet" Role="ToRole_ProjDetToCustFeedback"/>
+</AssociationSet>
+<AssociationSet Name="CustDetToProjectDetSet" Association="ZCUST_FEEDBACK_SRV.CustDetToProjectDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CustomerDetSet" Role="FromRole_CustDetToProjectDet"/>
+<End EntitySet="ProjectDetSet" Role="ToRole_CustDetToProjectDet"/>
+</AssociationSet>
+</EntityContainer>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://sap03server.triconhome.local:8010/sap/opu/odata/sap/ZCUST_FEEDBACK_SRV/$metadata"/>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://sap03server.triconhome.local:8010/sap/opu/odata/sap/ZCUST_FEEDBACK_SRV/$metadata"/>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>
