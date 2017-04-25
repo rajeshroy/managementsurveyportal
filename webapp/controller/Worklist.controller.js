@@ -30,37 +30,6 @@ sap.ui.define([
 
 			onGoPress: function(){
 				var sCustomerId = this.byId("managCustID").getSelectedKey();
-				/*var jsonModel =	this.getModel().getProperty("/CustomerDetSet(Mandt='001',Kunnr='" +sCustomerId +"')");
-				
-				var newModel = new JSONModel();
-				
-				newModel.setData(jsonModel);
-				
-				sap.ui.getCore().setModel(newModel, "newModel");*/
-				
-				var  mParameter, jsonModel = this.getModel();
-		
-			mParameter = {
-				context: null,
-				
-				async: true,
-			
-				success: jQuery.proxy(
-					),
-				error: jQuery.proxy(
-					)
-			};
-			jsonModel.read("/CustAvgFeedbackSet", mParameter);
-			
-		/*	var jsonModel =	this.getModel().getProperty("/CustAvgFeedbackSet(Mandt='001',Kunnr='" +sCustomerId +"')");*/
-				
-				var newModel = new JSONModel();
-				
-				newModel.setData(jsonModel);
-				
-				sap.ui.getCore().setModel(newModel, "newModel");
-			
-				
 				this.getRouter().navTo("object",{
 					objectId: sCustomerId
 				});
