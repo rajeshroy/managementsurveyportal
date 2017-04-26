@@ -118,6 +118,14 @@
 					"target": [
 						"object"
 					]
+				},
+				
+				{
+					"pattern": "CustomerDetSe89t/{objectId},{custId}",
+					"name": "manager",
+					"target": [
+						"manager"
+					]
 				}
 			],
 			"targets": {
@@ -132,6 +140,14 @@
 					"viewId": "object",
 					"viewLevel": 2,
 					"title": "{i18n>objectViewTitle}"
+				},
+				"manager":{
+					
+					"viewName": "MDList",
+					"viewId": "manager",
+					"viewLevel": 3,
+					"title": "{i18n>managerViewTitle}"
+				
 				},
 				"objectNotFound": {
 					"viewName": "ObjectNotFound",

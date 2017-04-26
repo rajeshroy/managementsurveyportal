@@ -1,0 +1,37 @@
+<mvc:View controllerName="mana.survey.portal.controller.MDList" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<App id="app">
+		<Page title="Management Survey" enableScrolling="true">
+			<content>
+				<List select="onItemSelect" id="CompanyList" items="{ path: '/' ,templateShareable: false }">
+					<CustomListItem>
+						<Panel id="idPanel" expandable="true" expanded="false" headerText="{Managerid}" width="auto" class="sapUiResponsiveMargin">
+							<content>
+								<Text text="Average Rating :"></Text>
+								<RatingIndicator id="idRate1123" maxValue="5" class="sapUiSmallMarginBottom" value="{FeedbackAvgFd}" tooltip="Rating Tooltip" change="rate"/>
+								<Table id="idProductsTable" inset="false" items="{path: 'questions' ,templateShareable: false}">
+									<columns>
+										<Column width="90%">
+											<Text text="Questions"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true">
+											<Text text="Ratings"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<ObjectIdentifier text="{ques1}"/>
+												<RatingIndicator id="idRate1" maxValue="5" class="sapUiSmallMarginBottom" value="{rating}" tooltip="Rating Tooltip" change="rate"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</content>
+						</Panel>
+					</CustomListItem>
+				</List>
+			</content>
+		</Page>
+	</App>
+</mvc:View>

@@ -41,6 +41,7 @@ sap.ui.define([
 			// Model used to manipulate control states. The chosen values make sure,
 			// detail page is busy indication immediately so there is no break in
 			// between the busy indication for loading the view's meta data
+			this.custId = "";
 			var iOriginalBusyDelay,
 				oViewModel = new JSONModel({
 					busy: true,
@@ -59,29 +60,6 @@ sap.ui.define([
 			});
 		},
 
-		onPress: function(oEvent) {
-
-			var dialog = new Dialog({
-				title: 'Go to the link',
-
-				content: new Link({
-					text: "Google",
-					href: ""
-				}),
-				beginButton: new Button({
-					text: 'Cancel',
-					press: function() {
-						dialog.close();
-					}
-				}),
-				afterClose: function() {
-					dialog.destroy();
-				}
-			});
-
-			dialog.open();
-
-		},
 
 		/* =========================================================== */
 		/* event handlers                                              */
@@ -98,9 +76,10 @@ sap.ui.define([
 		 * @private
 		 */
 		_onObjectMatched: function(oEvent) {
-			var aFilterData, mParameter, sObjectId, oModel = this.getModel();
-			sObjectId = oEvent.getParameter("arguments").objectId;
-			aFilterData = this._getCustomerFilter(sObjectId);
+			var aFilterData, mParameter, sCustId, oModel = this.getModel();
+			sCustId = oEvent.getParameter("arguments").objectId;
+			this.custId = sCustId;
+			aFilterData = this._getCustomerFilter(sCustId);
 			mParameter = {
 				context: null,
 				filters: aFilterData,
@@ -186,6 +165,42 @@ sap.ui.define([
 			oVizFrame.addFeed(feedColor);
 
 		},
+		
+		
+		onPress: function(oEvent) {
+			var rating = oEvent.getParameter("data")[0].data.Rating;
+/*			var oModelData;
+			var mParameter = {context : null,
+							filters: null,
+							sorters: null,
+							success: function(oSuccess){
+								oModelData = oSuccess.results;
+								var oData = [];
+								
+								for(var i =0; i<oModelData.length; i++){
+	
+									if(rating == oModelData[i].FeedbackAvgFd){
+										oData.push(oModelData[i]);
+									}
+								}
+								
+								var managerModel = new JSONModel();
+								managerModel.setData(oData);
+								sap.ui.getCore().setModel(managerModel,"oModelData");
+							},
+							
+							error: function(){}};
+         
+        	 this.getModel().read("/CustAvgFeedbackSet", mParameter);*/
+        	 
+			this.getRouter().navTo("manager",{
+					objectId: rating,
+					custId: this.custId
+				});
+
+		},
+		
+		
 		/**
 		 * Call back function used to handle the success of read call 
 		 * @param {oError} Success data
