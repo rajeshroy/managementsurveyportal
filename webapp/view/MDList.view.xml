@@ -3,13 +3,13 @@
 	<App id="app">
 		<Page title="Management Survey" enableScrolling="true">
 			<content>
-				<List select="onItemSelect" id="CompanyList" items="{ path: '/' ,templateShareable: false }">
+				<List select="onItemSelect" id="CompanyList" items="{ path: 'managerList>/' ,templateShareable: false }">
 					<CustomListItem>
-						<Panel id="idPanel" expandable="true" expanded="false" headerText="{Managerid}" width="auto" class="sapUiResponsiveMargin">
+						<Panel id="idPanel" expandable="true" expanded="false" headerText="{managerList>Managerid}" width="auto" class="sapUiResponsiveMargin" expand="onManagerExpand">
 							<content>
 								<Text text="Average Rating :"></Text>
-								<RatingIndicator id="idRate1123" maxValue="5" class="sapUiSmallMarginBottom" value="{FeedbackAvgFd}" tooltip="Rating Tooltip" change="rate"/>
-								<Table id="idProductsTable" inset="false" items="{path: 'questions' ,templateShareable: false}">
+								<RatingIndicator id="idRate1123" maxValue="5" class="sapUiSmallMarginBottom" value="{= ${managerList>FeedbackAvgFd} > 5 ? ${managerList>FeedbackAvgFd}/20 : ${managerList>FeedbackAvgFd} }" tooltip="Rating Tooltip" change="rate"/>
+								<Table id="idProductsTable" inset="false" items="{path: 'QuestionList>/' ,templateShareable: false}">
 									<columns>
 										<Column width="90%">
 											<Text text="Questions"/>
@@ -21,8 +21,8 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-												<ObjectIdentifier text="{ques1}"/>
-												<RatingIndicator id="idRate1" maxValue="5" class="sapUiSmallMarginBottom" value="{rating}" tooltip="Rating Tooltip" change="rate"/>
+												<ObjectIdentifier text="{QuestionList>Questionid}"/>
+												<RatingIndicator id="idRate1" maxValue="5" class="sapUiSmallMarginBottom" value="{= ${QuestionList>FeedbackRating} > 5 ? ${QuestionList>FeedbackRating}/20 :  ${QuestionList>FeedbackRating}}" tooltip="Rating Tooltip" change="rate"/>
 											</cells>
 										</ColumnListItem>
 									</items>
