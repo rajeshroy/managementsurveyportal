@@ -161,6 +161,7 @@ sap.ui.define([
 					'type': "Dimension",
 					'values': ["Rating"]
 				});
+			oVizFrame.removeAllFeeds();	
 			oVizFrame.addFeed(feedSize);
 			oVizFrame.addFeed(feedColor);
 

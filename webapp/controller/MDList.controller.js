@@ -23,19 +23,19 @@ sap.ui.define([
 
 		_onObjectMatched: function(oEvent) {
 			var aFilter, mParameter, sCustomerId, sRating, oArguments;
-			
+
 			oArguments = oEvent.getParameter("arguments");
 			sCustomerId = oArguments.custId;
 			sRating = oArguments.objectId;
 			aFilter = this._prepareFilter(sCustomerId, sRating);
-			mParameter ={
-			context: null,
-			/*urlParameters: {
-				expand:'CustFeedbackSet'
-			},*/
-			filters: aFilter,
-			success: jQuery.proxy(this.fnSuccessMListLoad, this),
-			error: jQuery.proxy(this.fnErrorMListLoad, this)
+			mParameter = {
+				context: null,
+				urlParameters: {
+					$expand: 'CustFeedbackSet'
+				},
+				filters: aFilter,
+				success: jQuery.proxy(this.fnSuccessMListLoad, this),
+				error: jQuery.proxy(this.fnErrorMListLoad, this)
 			};
 			this.getModel().read("/CustAvgFeedbackSet", mParameter);
 
@@ -44,60 +44,79 @@ sap.ui.define([
 		 * 
 		 * 
 		 */
-		 fnSuccessMListLoad: function(oSuccessData){
-			this.getModel("managerList").setProperty("/", oSuccessData.results);	
-		 },
-		 /**
-		  * 
-		  * 
-		  */
-		  fnErrorMListLoad: function(oError){
-		  	
-		  },
+		fnSuccessMListLoad: function(oSuccessData) {
+			this.getModel("managerList").setProperty("/", oSuccessData.results);
+		},
+		/**
+		 * 
+		 * 
+		 */
+		fnErrorMListLoad: function(oError) {
+
+		},
 		/**
 		 * This function is used to prepare the filter object
 		 * @param {string} sCustomerId Customer Id
 		 * @param {string} sRating customer avg. rating
 		 * @returns {object} oFilter
-		 */ 
-		 _prepareFilter: function(sCustomerId, sRating){
-		 	var aFilter =[ 
-		 	new Filter("Customerid", FilterOperator.EQ, sCustomerId),
-		 	new Filter("FeedbackAvgFd", FilterOperator.EQ, sRating)
-		 	];
-		 	return aFilter;
-		 },
-		 
-		 /**
-		  * 
-		  * 
-		  */
-		  onManagerExpand: function(oEvent){
-		  	var mParameter, sManagetId = oEvent.getSource().getHeaderText(),
-		  	aFilter = [new Filter("Managerid", FilterOperator.EQ, sManagetId)],
-		  	oModelManager = this.getModel("managerList").oData;
-		  	mParameter ={
-			context: null,
-			/*urlParameters: {
-				expand:'CustFeedbackSet'
-			},*/
-			filters: aFilter,
-			success: jQuery.proxy(this.fnSuccessQuesList, this),
-			error: jQuery.proxy(this.fnErrorQuesList, this)
-			};
-			this.getModel().read("/CustFeedbackSet", mParameter);
-			
-		
-		  	
-		  },
-		  
-		  /**
-		   * 
-		   * 
-		   */
-		   fnSuccessQuesList: function(oSuccessData){
-		   	 this.getModel("QuestionList").setProperty("/", oSuccessData.results);
-		   }
+		 */
+		_prepareFilter: function(sCustomerId, sRating) {
+			var aFilter = [
+				new Filter("Customerid", FilterOperator.EQ, sCustomerId),
+				new Filter("FeedbackAvgFd", FilterOperator.EQ, sRating)
+			];
+			return aFilter;
+		},
+
+		/**
+		 * 
+		 * 
+		 */
+		onManagerExpand: function(oEvent) {
+			var sContent, aFilter, mParameter, sManagetId, oSource;
+			sContent = oEvent.getSource().getContent();
+			if (sContent.length < 3) {
+				oSource = oEvent.getSource();
+				sManagetId = oEvent.getSource().getHeaderText();
+				aFilter = [new Filter("Managerid", FilterOperator.EQ, sManagetId)];
+
+				mParameter = {
+					context: null,
+					filters: aFilter,
+					success: jQuery.proxy(this.fnSuccessQuesList, this, oSource),
+					error: jQuery.proxy(this.fnErrorQuesList, this)
+				};
+
+				this.getModel().read("/CustFeedbackSet", mParameter);
+			}
+
+		},
+		/**
+		 * 
+		 * 
+		 */
+		fnSuccessQuesList: function(oSource, oSuccessData) {
+			var oTable, jsonModel, sFragId = this.createId("fragRatingId");
+			if (oSuccessData.results.length !== 0) {
+				if(!this.oFragRating){
+					this._initRatingFrag();
+				}
+				oSource.addContent(this.oFragRating);
+				oTable = this.byId(sap.ui.core.Fragment.createId(sFragId, "ratingTable"));
+				jsonModel = new JSONModel();
+				jsonModel.setProperty("/", oSuccessData.results);
+				oTable.setModel(jsonModel);
+			}
+		},
+		/**
+		 * 
+		 * 
+		 */
+		_initRatingFrag: function() {
+			var sFragId = this.createId("fragRatingId");
+			this.oFragRating = sap.ui.xmlfragment(sFragId, "mana.survey.portal.fragments.ratingSet", this);
+			this.getView().addDependent(this.oFragRating);
+		}
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

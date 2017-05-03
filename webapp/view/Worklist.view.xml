@@ -1,29 +1,17 @@
-<mvc:View
-	controllerName="mana.survey.portal.controller.Worklist"
-	xmlns="sap.m"
-	xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.m.semantic"
-	xmlns:footerbar="sap.ushell.ui.footerbar">
-
-	<semantic:FullscreenPage
-		id="page"
-        semanticRuleSet="Optimized"
-		title="{i18n>worklistViewTitle}">
-		<semantic:content>
-			
-			
-			<Select id="managCustID"
-					forceSelection="false"
-					selectedKey="{/CustomerDetSet/0/kunnr}"
-					items="{
-						path: '/CustomerDetSet',
-						sorter: { path: 'Name1' }
-					}">
-					<core:Item key="{Kunnr}" text="{Name1}" />
-				</Select>
-			<Button text="{i18n>worklistGo}" press="onGoPress"/>
-		</semantic:content>
-	</semantic:FullscreenPage>
-
+<mvc:View controllerName="mana.survey.portal.controller.Worklist" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns:f="sap.ui.layout.form" xmlns:footerbar="sap.ushell.ui.footerbar">
+	<FlexBox alignItems="End" justifyContent="Center">
+		<items>
+			<f:SimpleForm id="SimpleFormChange471" minWidth="1024" maxContainerCols="1" editable="true" layout="ResponsiveGridLayout" title="Please select customer:"
+				labelSpanL="4" labelSpanM="4" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" class="editableForm">
+				<f:content>
+					<Select id="managCustID" forceSelection="false" selectedKey="{/CustomerDetSet/0/kunnr}"
+						items="{ path: '/CustomerDetSet', sorter: { path: 'Name1' } }">
+						<core:Item key="{Kunnr}" text="{Name1}"/>
+					</Select>
+					<Button text="{i18n>worklistGo}" press="onGoPress"/>
+				</f:content>
+			</f:SimpleForm>
+		</items>
+	</FlexBox>
 </mvc:View>
