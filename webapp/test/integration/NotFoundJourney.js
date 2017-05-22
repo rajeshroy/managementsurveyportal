@@ -1,6 +1,5 @@
 sap.ui.define([
-		"sap/ui/test/opaQunit"
-	], function (opaTest) {
+	], function () {
 		"use strict";
 
 		QUnit.module("NotFound");
@@ -24,17 +23,6 @@ sap.ui.define([
 
 			// Assertions
 			Then.onTheWorklistPage.iShouldSeeTheTable();
-		});
-
-		opaTest("Should see the not found text for no search results", function (Given, When, Then) {
-			// Arrangements
-			Given.iStartMyApp();
-
-			//Actions
-			When.onTheWorklistPage.iSearchForSomethingWithNoResults();
-
-			// Assertions
-			Then.onTheWorklistPage.iShouldSeeTheNoDataTextForNoSearchResults();
 		});
 
 		opaTest("Clicking the back button should take me back to the not found page", function (Given, When, Then) {

@@ -1,8 +1,6 @@
 sap.ui.define([
-		"sap/ui/test/Opa5",
-		"sap/ui/test/actions/Press",
 		"sap/ui/test/matchers/PropertyStrictEquals"
-	], function(Opa5, Press, PropertyStrictEquals) {
+	], function(PropertyStrictEquals) {
 		"use strict";
 
 		return {
@@ -17,7 +15,9 @@ sap.ui.define([
 								name : "icon",
 								value : "sap-icon://action"
 							}),
-							actions : new Press(),
+							success : function (aButtons) {
+								aButtons[0].$().trigger("tap");
+							},
 							errorMessage : "Did not find the share button"
 						});
 					}
@@ -36,7 +36,7 @@ sap.ui.define([
 								value : "sap-icon://email"
 							}),
 							success : function () {
-								Opa5.assert.ok(true, "The E-Mail button is visible");
+								QUnit.ok(true, "The E-Mail button is visible");
 							},
 							errorMessage : "The E-Mail button was not found"
 						});
@@ -47,7 +47,7 @@ sap.ui.define([
 							id : "shareTile",
 							viewName : sViewName,
 							success : function () {
-								Opa5.assert.ok(true, "The Save as Tile button is visible");
+								QUnit.ok(true, "The Save as Tile button is visible");
 							},
 							errorMessage : "The Save as Tile  button was not found"
 						});
@@ -58,7 +58,7 @@ sap.ui.define([
 							id : "shareJam",
 							viewName : sViewName,
 							success : function () {
-								Opa5.assert.ok(true, "The Jam share button is visible");
+								QUnit.ok(true, "The Jam share button is visible");
 							},
 							errorMessage : "The Jam share button was not found"
 						});

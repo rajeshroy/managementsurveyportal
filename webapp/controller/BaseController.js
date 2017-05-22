@@ -44,6 +44,17 @@ sap.ui.define([
 			},
 
 			/**
+			 * Event handler when the share button has been clicked
+			 * @param {sap.ui.base.Event} oEvent the butten press event
+			 * @public
+			 */
+			onSharePress : function () {
+				var oShareSheet = this.byId("shareSheet");
+				jQuery.sap.syncStyleClass(this.getOwnerComponent().getContentDensityClass(), this.getView(), oShareSheet);
+				oShareSheet.openBy(this.byId("shareButton"));
+			},
+
+			/**
 			 * Event handler when the share by E-Mail button has been clicked
 			 * @public
 			 */

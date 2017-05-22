@@ -8,9 +8,9 @@ sap.ui.define([
 			sUrlParameters = sUrlParameters ? "?" + sUrlParameters : "";
 
 			if (sHash) {
-				sHash = "#ManagementPortal-display&/" + (sHash.indexOf("/") === 0 ? sHash.substring(1) : sHash);
+				sHash = "#ManagementSurveyPortal-display&/" + (sHash.indexOf("/") === 0 ? sHash.substring(1) : sHash);
 			} else {
-				sHash = "#ManagementPortal-display";
+				sHash = "#ManagementSurveyPortal-display";
 			}
 
 			return sUrl + sUrlParameters + sHash;
@@ -19,51 +19,18 @@ sap.ui.define([
 		return Opa5.extend("mana.survey.portal.test.integration.pages.Common", {
 
 			iStartMyApp : function (oOptions) {
-				var sUrlParameters;
+				var sUrlParameters = "";
 				oOptions = oOptions || {};
 
-				// Start the app with a minimal delay to make tests run fast but still async to discover basic timing issues
-				var iDelay = oOptions.delay || 50;
-
-				sUrlParameters = "serverDelay=" + iDelay;
+				if (oOptions.delay) {
+					sUrlParameters = "serverDelay=" + oOptions.delay;
+				}
 
 				this.iStartMyAppInAFrame(getFrameUrl(oOptions.hash, sUrlParameters));
 			},
 
 			iLookAtTheScreen : function () {
 				return this;
-			},
-
-			createAWaitForAnEntitySet : function  (oOptions) {
-				return {
-					success: function () {
-						var bMockServerAvailable = false,
-							aEntitySet;
-
-						this.getMockServer().then(function (oMockServer) {
-							aEntitySet = oMockServer.getEntitySetData(oOptions.entitySet);
-							bMockServerAvailable = true;
-						});
-
-						return this.waitFor({
-							check: function () {
-								return bMockServerAvailable;
-							},
-							success : function () {
-								oOptions.success.call(this, aEntitySet);
-							},
-							errorMessage: "was not able to retireve the entity set " + oOptions.entitySet
-						});
-					}
-				};
-			},
-
-			getMockServer : function () {
-				return new Promise(function (success) {
-					Opa5.getWindow().sap.ui.require(["mana/survey/portal/localService/mockserver"], function (mockserver) {
-						success(mockserver.getMockServer());
-					});
-				});
 			},
 
 			iStartMyAppOnADesktopToTestErrorHandler : function (sParam) {
