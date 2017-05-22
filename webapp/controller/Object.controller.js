@@ -43,21 +43,21 @@ sap.ui.define([
 			// between the busy indication for loading the view's meta data
 			this.custId = "";
 			var iOriginalBusyDelay,
-			/*	oViewModel = new JSONModel({
+				oViewModel = new JSONModel({
 					busy: true,
 					delay: 0
-				}),*/
+				}),
 				oLocalJSONModel = new JSONModel();
 			this.setModel(oLocalJSONModel, "customerModel");
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
 			// Store original busy indicator delay, so it can be restored later on
-			//iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
-			//this.setModel(oViewModel, "objectView");
-			/*this.getOwnerComponent().getModel().metadataLoaded().then(function() {
+			iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
+			this.setModel(oViewModel, "objectView");
+			this.getOwnerComponent().getModel().metadataLoaded().then(function() {
 				// Restore original busy indicator delay for the object view
 				oViewModel.setProperty("/delay", iOriginalBusyDelay);
-			});*/
+			});
 		},
 
 
@@ -219,10 +219,6 @@ sap.ui.define([
 				new Filter("Customerid", FilterOperator.EQ, sCompanyId)
 			];
 			return afilterData;
-		},
-		
-				onNavBack: function() {
-	this.getRouter().navTo("worklist");
 		}
 
 	});

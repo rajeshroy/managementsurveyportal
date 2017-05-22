@@ -1,8 +1,9 @@
 sap.ui.define([
-	], function () {
+		"sap/ui/test/opaQunit"
+	], function (opaTest) {
 		"use strict";
 
-		module("Worklist");
+		QUnit.module("Worklist");
 
 		opaTest("Should see the table with all entries", function (Given, When, Then) {
 			// Arrangements
@@ -16,12 +17,21 @@ sap.ui.define([
 				and.theTitleShouldDisplayTheTotalAmountOfItems();
 		});
 
-		opaTest("Should be able to load 10 more items", function (Given, When, Then) {
+		opaTest("Search for the First object should deliver results that contain the firstObject in the name", function (Given, When, Then) {
 			//Actions
-			When.onTheWorklistPage.iPressOnMoreData();
+			When.onTheWorklistPage.iSearchForTheFirstObject();
 
 			// Assertions
-			Then.onTheWorklistPage.theTableShouldHaveTheDoubleAmountOfInitialEntries();
+			Then.onTheWorklistPage.theTableShowsOnlyObjectsWithTheSearchStringInTheirTitle();
+		});
+
+
+		opaTest("Entering something that cannot be found into search field and pressing search field's refresh should leave the list as it was", function (Given, When, Then) {
+			//Actions
+			When.onTheWorklistPage.iTypeSomethingInTheSearchThatCannotBeFoundAndTriggerRefresh();
+
+			// Assertions
+			Then.onTheWorklistPage.theTableHasEntries();
 		});
 
 		opaTest("Should open the share menu and display the share buttons", function (Given, When, Then) {

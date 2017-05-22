@@ -37,20 +37,23 @@ sap.ui.define([
 							}),
 							success : function () {
 								// we set the view busy, so we need to query the parent of the app
-								QUnit.ok(true, "The rootview is busy");
+								Opa5.assert.ok(true, "The rootview is busy");
 							},
 							errorMessage : "Did not find the App control"
 						});
 					},
 
-					iShouldSeeTheMessageBox : function (sMessageBoxId) {
+					iShouldSeeTheMessageBox : function () {
 						return this.waitFor({
-							id : sMessageBoxId,
-							success : function () {
-								QUnit.ok(true, "The correct MessageBox was shown");
+							searchOpenDialogs: true,
+							controlType: "sap.m.Dialog",
+							success: function () {
+								Opa5.assert.ok(true, "The correct MessageBox was shown");
 							}
 						});
+
 					}
+
 				}
 
 			}

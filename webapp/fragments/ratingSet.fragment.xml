@@ -1,22 +1,21 @@
 <core:FragmentDefinition height="100%" xmlns:core="sap.ui.core" xmlns="sap.m">
-	<!--<Table id="ratingTable" inset="false" items="{path:'quesSet>/results'}">
-	<!--<Table id="ratingTable" inset="false">-->
-	<!--	<columns>
-			<Column width="75%">
+	<Table id="ratingTable" inset="false" items="{path:'/'}">
+		<columns>
+			<Column width="90%">
 				<Text text="Questions"/>
 			</Column>
-			<Column minScreenWidth="Tablet" demandPopin="true" class="sapUiSmallMarginBottom" hAlign ="Center">
+			<Column minScreenWidth="Tablet" demandPopin="true">
 				<Text text="Ratings"/>
 			</Column>
 		</columns>
 		<items>
 			<ColumnListItem>
 				<cells>
-					<ObjectIdentifier title="{quesSet>QuestionText}" />
+					<ObjectIdentifier text="{Questionid}"/>
 					<RatingIndicator id="idRate1" maxValue="5" class="sapUiSmallMarginBottom"
-						value="{quesSet>FeedbackRating}" tooltip="Rating Tooltip" change="rate"/>
+						value="{= ${FeedbackRating} > 5 ? ${FeedbackRating}/20 : ${FeedbackRating}}" tooltip="Rating Tooltip" change="rate"/>
 				</cells>
 			</ColumnListItem>
 		</items>
-	</Table>-->
+	</Table>
 </core:FragmentDefinition>

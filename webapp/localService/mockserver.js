@@ -4,9 +4,7 @@ sap.ui.define([
 		"use strict";
 		var oMockServer,
 			_sAppModulePath = "mana/survey/portal/",
-			_sJsonFilesModulePath = _sAppModulePath + "localService/mockdata",
-			_sMetadataUrl = _sAppModulePath + "localService/metadata",
-			_sMainDataSourceUrl = "/here/goes/your/serviceurl/";
+			_sJsonFilesModulePath = _sAppModulePath + "localService/mockdata";
 
 		return {
 
@@ -19,13 +17,18 @@ sap.ui.define([
 			init : function () {
 				var oUriParameters = jQuery.sap.getUriParameters(),
 					sJsonFilesUrl = jQuery.sap.getModulePath(_sJsonFilesModulePath),
+					sManifestUrl = jQuery.sap.getModulePath(_sAppModulePath + "manifest", ".json"),
 					sEntity = "CustomerDetSet",
 					sErrorParam = oUriParameters.get("errorType"),
 					iErrorCode = sErrorParam === "badRequest" ? 400 : 500,
-					sMetadataUrl = jQuery.sap.getModulePath(_sMetadataUrl, ".xml");
+					oManifest = jQuery.sap.syncGetJSON(sManifestUrl).data,
+					oMainDataSource = oManifest["sap.app"].dataSources.mainService,
+					sMetadataUrl = jQuery.sap.getModulePath(_sAppModulePath + oMainDataSource.settings.localUri.replace(".xml", ""), ".xml"),
+					// ensure there is a trailing slash
+					sMockServerUrl = /.*\/$/.test(oMainDataSource.uri) ? oMainDataSource.uri : oMainDataSource.uri + "/";
 
 				oMockServer = new MockServer({
-					rootUri: _sMainDataSourceUrl
+					rootUri : sMockServerUrl
 				});
 
 				// configure mock server with a delay of 1s

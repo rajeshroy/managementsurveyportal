@@ -1,7 +1,8 @@
 sap.ui.require([
 		"sap/ui/test/Opa5",
+		"sap/ui/test/actions/Press",
 		"mana/survey/portal/test/integration/pages/Common"
-	], function(Opa5, Common) {
+	], function(Opa5, Press, Common) {
 		"use strict";
 
 		Opa5.createPageObjects({
@@ -15,8 +16,8 @@ sap.ui.require([
 							id : "page",
 							viewName : "ObjectNotFound",
 							success : function (oPage) {
-								strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("objectTitle"), "the object text is shown as title");
-								strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("noObjectFoundText"), "the object not found text is shown");
+								Opa5.assert.strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("objectTitle"), "the object text is shown as title");
+								Opa5.assert.strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("noObjectFoundText"), "the object not found text is shown");
 							},
 							errorMessage : "Did not display the object not found text"
 						});
@@ -27,8 +28,8 @@ sap.ui.require([
 							id : "page",
 							viewName : "NotFound",
 							success : function (oPage) {
-								strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("notFoundTitle"), "the not found title is shown as title");
-								strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("notFoundText"), "the not found text is shown");
+								Opa5.assert.strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("notFoundTitle"), "the not found title is shown as title");
+								Opa5.assert.strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("notFoundText"), "the not found text is shown");
 							},
 							errorMessage : "Did not display the object not found text"
 						});
@@ -38,9 +39,7 @@ sap.ui.require([
 						return this.waitFor({
 							id : "link",
 							viewName : "ObjectNotFound",
-							success : function (oLink) {
-								oLink.$().trigger("click");
-							},
+							actions : new Press(),
 							errorMessage : "Did not find the link on the not found page"
 						});
 					},
@@ -49,9 +48,7 @@ sap.ui.require([
 						return this.waitFor({
 							id : "link",
 							viewName : "NotFound",
-							success : function (oLink) {
-								oLink.$().trigger("click");
-							},
+							actions : new Press(),
 							errorMessage : "Did not find the link on the not found page"
 						});
 					}
@@ -64,8 +61,8 @@ sap.ui.require([
 							id : "page",
 							viewName : "ObjectNotFound",
 							success: function (oPage) {
-								strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("objectTitle"), "the object text is shown as title");
-								strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("noObjectFoundText"), "the object not found text is shown");
+								Opa5.assert.strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("objectTitle"), "the object text is shown as title");
+								Opa5.assert.strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("noObjectFoundText"), "the object not found text is shown");
 							},
 							errorMessage: "Did not display the object not found text"
 						});
@@ -76,8 +73,8 @@ sap.ui.require([
 							id : "page",
 							viewName : "NotFound",
 							success: function (oPage) {
-								strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("notFoundTitle"), "the not found title is shown as title");
-								strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("notFoundText"), "the not found text is shown");
+								Opa5.assert.strictEqual(oPage.getTitle(), oPage.getModel("i18n").getProperty("notFoundTitle"), "the not found title is shown as title");
+								Opa5.assert.strictEqual(oPage.getText(), oPage.getModel("i18n").getProperty("notFoundText"), "the not found text is shown");
 							},
 							errorMessage: "Did not display the object not found text"
 						});

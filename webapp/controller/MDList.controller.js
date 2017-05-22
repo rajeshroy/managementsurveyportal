@@ -19,12 +19,9 @@ sap.ui.define([
 			this.setModel(new JSONModel(), "QuestionList");
 			this.setModel(oJSONModel, "managerList");
 			this.getRouter().getRoute("manager").attachPatternMatched(this._onObjectMatched, this);
-				this.custId = "";
 		},
 
 		_onObjectMatched: function(oEvent) {
-				var sCustId = oEvent.getParameter("arguments").custId;
-			this.custId = sCustId;
 			var aFilter, mParameter, sCustomerId, sRating, oArguments;
 
 			oArguments = oEvent.getParameter("arguments");
@@ -34,7 +31,7 @@ sap.ui.define([
 			mParameter = {
 				context: null,
 				urlParameters: {
-					$expand: 'LT_FEEDBACK'
+					$expand: 'CustFeedbackSet'
 				},
 				filters: aFilter,
 				success: jQuery.proxy(this.fnSuccessMListLoad, this),
@@ -48,11 +45,7 @@ sap.ui.define([
 		 * 
 		 */
 		fnSuccessMListLoad: function(oSuccessData) {
-			var aManagerList = oSuccessData.results;
-			for (var i = 0; i < aManagerList.length; i++) {
-				aManagerList[i].FeedbackAvgFd = parseInt(aManagerList[i].FeedbackAvgFd, 10);
-			}
-			this.getModel("managerList").setProperty("/", aManagerList);
+			this.getModel("managerList").setProperty("/", oSuccessData.results);
 		},
 		/**
 		 * 
@@ -80,12 +73,12 @@ sap.ui.define([
 		 * 
 		 */
 		onManagerExpand: function(oEvent) {
-/*			var sContent, aFilter, mParameter, sProjectId, oSource;
+			var sContent, aFilter, mParameter, sManagetId, oSource;
 			sContent = oEvent.getSource().getContent();
 			if (sContent.length < 3) {
 				oSource = oEvent.getSource();
-				sProjectId = this.getModel("managerList").getProperty("Projectid", oEvent.getSource().getBindingContext("managerList"));
-				aFilter = [new Filter("Projectid", FilterOperator.EQ, sProjectId)];
+				sManagetId = oEvent.getSource().getHeaderText();
+				aFilter = [new Filter("Managerid", FilterOperator.EQ, sManagetId)];
 
 				mParameter = {
 					context: null,
@@ -95,43 +88,8 @@ sap.ui.define([
 				};
 
 				this.getModel().read("/CustFeedbackSet", mParameter);
-			}*/
+			}
 
-		
-				var managList = this.getModel("managerList").getData();
-				var arr = [];
-				for(var i = 0; i < managList.length; i++ )
-			{
-			
-					 arr[i] = managList[i].LT_FEEDBACK;
-					 
-					 var ques_length =managList[i].LT_FEEDBACK.results.length;
-					 	var ques =[];
-					 for(var j=i;j<ques_length;j++){
-    if(managList[i].Projectid == managList[i].LT_FEEDBACK.results[j].Projectid)
-    {
-    
-        // ques[j] = managList[i].LT_FEEDBACK.results[j];
-         ques.push( managList[i].LT_FEEDBACK.results[j]);
-    }
-    else{
-    	continue;
-    }
-					 }				 
-					 
-			if(oEvent.getParameters().id === "application-Test-url-component---manager--idPanel-application-Test-url-component---manager--CompanyList-"+i) 
-			{
-					var quesSet = new JSONModel();
-			quesSet.setData(ques);
-			this.getView().byId(oEvent.getParameters().id).setModel(quesSet, "quesSet");
-
-			}
-			else{
-				continue;
-			}
-			}
-			
-			
 		},
 		/**
 		 * 
@@ -140,15 +98,14 @@ sap.ui.define([
 		fnSuccessQuesList: function(oSource, oSuccessData) {
 			var oTable, jsonModel, sFragId = this.createId("fragRatingId");
 			if (oSuccessData.results.length !== 0) {
-				if (!this.oFragRating) {
+				if(!this.oFragRating){
 					this._initRatingFrag();
 				}
 				oSource.addContent(this.oFragRating);
 				oTable = this.byId(sap.ui.core.Fragment.createId(sFragId, "ratingTable"));
 				jsonModel = new JSONModel();
 				jsonModel.setProperty("/", oSuccessData.results);
-				oTable.setModel(jsonModel, "checkModel");
-				
+				oTable.setModel(jsonModel);
 			}
 		},
 		/**
@@ -159,23 +116,6 @@ sap.ui.define([
 			var sFragId = this.createId("fragRatingId");
 			this.oFragRating = sap.ui.xmlfragment(sFragId, "mana.survey.portal.fragments.ratingSet", this);
 			this.getView().addDependent(this.oFragRating);
-		},
-		
-				onNavBack1: function(evt) {
-						 var managList = this.getModel("managerList").getData();
-				for(var i = 0; i < managList.length; i++ )
-			{
-				var expand ;
-				expand = "application-Test-url-component---manager--idPanel-application-Test-url-component---manager--CompanyList-"+i;
-                this.getView().byId(expand).setExpanded(false);
-		
-			}
-					
-					
-				var sCustomerId = this.getModel("managerList").getData()[0].Customerid;
-                 this.getRouter().navTo("object",{
-					objectId: this.custId
-				});
 		}
 
 		/**
