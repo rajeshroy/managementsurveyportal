@@ -1,6 +1,5 @@
 sap.ui.define([
-		"sap/ui/test/opaQunit"
-	], function (opaTest) {
+	], function () {
 		"use strict";
 
 		QUnit.module("Navigation");
@@ -18,7 +17,7 @@ sap.ui.define([
 
 		opaTest("Should react on hashchange", function (Given, When, Then) {
 			// Actions
-			When.onTheWorklistPage.iRememberTheItemAtPosition(2);
+			When.onTheWorklistPage.iRememberTheItemAtPosition(7);
 			When.onTheBrowser.iChangeTheHashToTheRememberedItem();
 
 			// Assertions
@@ -28,7 +27,7 @@ sap.ui.define([
 
 		opaTest("Should go back to the TablePage", function (Given, When, Then) {
 			// Actions
-			When.onTheBrowser.iPressOnTheBackwardsButton();
+			When.onTheObjectPage.iPressTheBackButton();
 
 			// Assertions
 			Then.onTheWorklistPage.iShouldSeeTheTable();
@@ -80,7 +79,7 @@ sap.ui.define([
 			Given.iStartMyAppOnADesktopToTestErrorHandler("metadataError=true");
 
 			//Assertions
-			Then.onTheAppPage.iShouldSeeTheMessageBox().
+			Then.onTheAppPage.iShouldSeeTheMessageBox("metadataErrorMessageBox").
 				and.iTeardownMyAppFrame();
 
 		});
@@ -90,7 +89,7 @@ sap.ui.define([
 			Given.iStartMyAppOnADesktopToTestErrorHandler("errorType=serverError");
 
 			//Assertions
-			Then.onTheAppPage.iShouldSeeTheMessageBox().
+			Then.onTheAppPage.iShouldSeeTheMessageBox("serviceErrorMessageBox").
 				and.iTeardownMyAppFrame();
 
 		});

@@ -19,6 +19,7 @@ sap.ui.define([
 				this._oModel = oComponent.getModel();
 				this._bMessageOpen = false;
 				this._sErrorText = this._oResourceBundle.getText("errorText");
+				this._sErrorTitle = this._oResourceBundle.getText("errorTitle");
 
 				this._oModel.attachMetadataFailed(function (oEvent) {
 					var oParams = oEvent.getParameters();
@@ -44,10 +45,12 @@ sap.ui.define([
 			 * @private
 			 */
 			_showMetadataError : function (sDetails) {
-				MessageBox.error(
+				MessageBox.show(
 					this._sErrorText,
 					{
 						id : "metadataErrorMessageBox",
+						icon: MessageBox.Icon.ERROR,
+						title: this._sErrorTitle,
 						details: sDetails,
 						styleClass: this._oComponent.getContentDensityClass(),
 						actions: [MessageBox.Action.RETRY, MessageBox.Action.CLOSE],
@@ -71,10 +74,12 @@ sap.ui.define([
 					return;
 				}
 				this._bMessageOpen = true;
-				MessageBox.error(
+				MessageBox.show(
 					this._sErrorText,
 					{
 						id : "serviceErrorMessageBox",
+						icon: MessageBox.Icon.ERROR,
+						title: this._sErrorTitle,
 						details: sDetails,
 						styleClass: this._oComponent.getContentDensityClass(),
 						actions: [MessageBox.Action.CLOSE],

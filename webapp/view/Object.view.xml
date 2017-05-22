@@ -1,41 +1,19 @@
-<mvc:View
-	controllerName="mana.survey.portal.controller.Object"
-	xmlns="sap.m"
-	xmlns:viz="sap.viz.ui5.controls"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.m.semantic"
+<mvc:View controllerName="mana.survey.portal.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:viz="sap.viz.ui5.controls" xmlns:l="sap.ui.layout"
 	xmlns:footerbar="sap.ushell.ui.footerbar">
-
-	<semantic:FullscreenPage
-		id="page"
-        semanticRuleSet="Optimized"
-		title="{i18n>objectTitle}"
-		busy="{objectView}"
+	
+<App>
+	<Page id="page" navButtonPress="onNavBack" showNavButton="true"  title="{i18n>objectTitle}" busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
 
-		<semantic:content>
-			<ObjectHeader
-				id="objectHeader"
-				title="{Land1}"
->
-			</ObjectHeader>
-			
-			<viz:VizFrame xmlns="sap.viz" id="idpiechart" vizType="pie" selectData = "onPress" />
-			
- 		</semantic:content>
+		<content>
+			<ObjectHeader id="objectHeader" title="{Land1}"></ObjectHeader>
 
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
-
-		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton id ="shareTile" title="{objectView>/saveAsTileTitle}" />
-		</semantic:saveAsTileAction>
-
-	</semantic:FullscreenPage>
-
+			<viz:VizFrame height="70%"  width="100%" xmlns="sap.viz" id="idpiechart" vizType="pie" selectData="onPress"/>
+</content>
+		<footer>
+		</footer>
+	</Page>
+	
+</App>
 </mvc:View>
+
