@@ -10,39 +10,35 @@ sap.ui.define([
 
 		QUnit.module("Initialization", {
 
-			setup : function () {
-				var oViewStub = {
-					getModel: function () {
-						return this.oViewModel;
-					}.bind(this),
-					setModel: function (oModel) {
-						this.oViewModel = oModel;
-					}.bind(this),
-					getBusyIndicatorDelay: function () {
-						return null;
-					},
-					addStyleClass: function () {}
-				};
+			beforeEach : function () {
+				this.oViewStub = new Control();
+				this.oComponentStub = new Control();
 
-				this.oComponentStub = {
-					oWhenMetadataIsLoaded: {
-					},
-					getContentDensityClass: function () {
-						return null;
-					}
+				this.fnMetadataThen = jQuery.noop;
+				var oODataModelStub = new JSONModel();
+				oODataModelStub.metadataLoaded = function () {
+					return {
+						then: this.fnMetadataThen
+					};
+				}.bind(this);
+
+				this.oComponentStub.setModel(oODataModelStub);
+				this.oComponentStub.getContentDensityClass = function() {
+					return "sapUiSizeCompact";
 				};
 
 				sinon.config.useFakeTimers = false;
 
 				sinon.stub(Controller.prototype, "getOwnerComponent").returns(this.oComponentStub);
-				sinon.stub(Controller.prototype, "getView").returns(oViewStub);
+				sinon.stub(Controller.prototype, "getView").returns(this.oViewStub);
 			},
 
-			teardown : function () {
+			afterEach : function () {
 				Controller.prototype.getOwnerComponent.restore();
 				Controller.prototype.getView.restore();
 
-				this.oViewModel.destroy();
+				this.oViewStub.destroy();
+				this.oComponentStub.destroy();
 			}
 		});
 
@@ -51,14 +47,11 @@ sap.ui.define([
 			var oModelData,
 				oAppController;
 
-			// Do not resolve the thenable
-			this.oComponentStub.oWhenMetadataIsLoaded.then = jQuery.noop;
-
 			// Act
 			oAppController = new AppController();
 			oAppController.onInit();
 
-			oModelData = this.oViewModel.getData();
+			oModelData = this.oViewStub.getModel("appView").getData();
 			// Assert
 			assert.strictEqual(oModelData.delay, 0, "The root view has no busy indicator delay set.");
 			assert.strictEqual(oModelData.busy, true, "The root view is busy.");
@@ -68,13 +61,13 @@ sap.ui.define([
 			var oModelData,
 				oAppController;
 
-			this.oComponentStub.oWhenMetadataIsLoaded.then = function (fnThenCallback) {
+			this.fnMetadataThen = function (fnThenCallback) {
 				// invoke the thenable immediately
 				fnThenCallback();
 
-				oModelData = this.oViewModel.getData();
+				oModelData = this.oViewStub.getModel("appView").getData();
 				// Assert
-				assert.strictEqual(oModelData.delay, null, "The root view has the default busy indicator delay set.");
+				assert.strictEqual(oModelData.delay, this.oViewStub.getBusyIndicatorDelay(), "The root view has the default busy indicator delay set.");
 				assert.strictEqual(oModelData.busy, false, "The root view is not busy.");
 			}.bind(this);
 

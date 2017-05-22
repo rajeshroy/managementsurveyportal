@@ -1,24 +1,31 @@
 jQuery.sap.require("sap.ui.qunit.qunit-css");
 jQuery.sap.require("sap.ui.thirdparty.qunit");
 jQuery.sap.require("sap.ui.qunit.qunit-junit");
-jQuery.sap.require("sap.ui.test.opaQunit");
-jQuery.sap.require("sap.ui.test.Opa5");
+QUnit.config.autostart = false;
 
-jQuery.sap.require("mana.survey.portal.test.integration.pages.Common");
-jQuery.sap.require("mana.survey.portal.test.integration.pages.Worklist");
-jQuery.sap.require("mana.survey.portal.test.integration.pages.Object");
-jQuery.sap.require("mana.survey.portal.test.integration.pages.NotFound");
-jQuery.sap.require("mana.survey.portal.test.integration.pages.Browser");
-jQuery.sap.require("mana.survey.portal.test.integration.pages.App");
+sap.ui.require([
+		"sap/ui/test/Opa5",
+		"mana/survey/portal/test/integration/pages/Common",
+		"sap/ui/test/opaQunit",
+		"mana/survey/portal/test/integration/pages/Worklist",
+		"mana/survey/portal/test/integration/pages/Object",
+		"mana/survey/portal/test/integration/pages/NotFound",
+		"mana/survey/portal/test/integration/pages/Browser",
+		"mana/survey/portal/test/integration/pages/App"
+	], function (Opa5, Common) {
+	"use strict";
+	Opa5.extendConfig({
+		arrangements: new Common(),
+		viewNamespace: "mana.survey.portal.view."
+	});
 
-sap.ui.test.Opa5.extendConfig({
-	arrangements: new mana.survey.portal.test.integration.pages.Common(),
-	viewNamespace: "mana.survey.portal.view."
+	sap.ui.require([
+		"mana/survey/portal/test/integration/WorklistJourney",
+		"mana/survey/portal/test/integration/ObjectJourney",
+		"mana/survey/portal/test/integration/NavigationJourney",
+		"mana/survey/portal/test/integration/NotFoundJourney",
+		"mana/survey/portal/test/integration/FLPIntegrationJourney"
+	], function () {
+		QUnit.start();
+	});
 });
-
-// Start the tests
-jQuery.sap.require("mana.survey.portal.test.integration.WorklistJourney");
-jQuery.sap.require("mana.survey.portal.test.integration.ObjectJourney");
-jQuery.sap.require("mana.survey.portal.test.integration.NavigationJourney");
-jQuery.sap.require("mana.survey.portal.test.integration.NotFoundJourney");
-jQuery.sap.require("mana.survey.portal.test.integration.FLPIntegrationJourney");
