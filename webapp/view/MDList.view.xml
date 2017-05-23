@@ -8,32 +8,35 @@
 						<Panel id="idPanel" expandable="true" expanded="false" headerText="{managerList>ManagerName}" width="auto" class="sapUiResponsiveMargin"
 							expand="onManagerExpand">
 							<content>
+								<VBox>
+								<HBox>	
 								<Text text="Average Rating :"></Text>
-								<RatingIndicator id="idRate1123" maxValue="5"  enabled = "false"
-									value="{managerList>FeedbackAvgFd}" tooltip="Rating Tooltip"
-									change="rate"/>
-									
-										<Table id="ratingTable" inset="false" items="{path:'quesSet>/'}">
-	<!--<Table id="ratingTable" inset="false">-->
-		<columns>
-			<Column width="75%">
-				<Text text="Questions"/>
-			</Column>
-			<Column minScreenWidth="Tablet" demandPopin="true" class="sapUiSmallMarginBottom" hAlign ="Center">
-				<Text text="Ratings"/>
-			</Column>
-		</columns>
-		<items>
-			<ColumnListItem>
-				<cells>
-					<ObjectIdentifier title="{quesSet>QuestionText}" />
-					<RatingIndicator id="idRate1" maxValue="5" class="sapUiSmallMarginBottom" enabled = "false"
-						value="{quesSet>FeedbackRating}" tooltip="Rating Tooltip" change="rate"/>
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
-								
+								<RatingIndicator id="idRate1123" maxValue="5" enabled="false" value="{managerList>FeedbackAvgFd}" tooltip="Rating Tooltip" change="rate"/>
+								</HBox>
+								<HBox>
+								<Text text="Feedback Description :"></Text>
+								<TextArea enabled="false" value="{managerList>FeedbackDesc}"/>
+								</HBox>
+								</VBox>
+								<Table id="ratingTable" inset="false" items="{path:'quesSet>/'}">
+									<columns>
+										<Column width="75%">
+											<Text text="Questions"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" class="sapUiSmallMarginBottom" hAlign="Center">
+											<Text text="Ratings"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<ObjectIdentifier title="{quesSet>QuestionText}"/>
+												<RatingIndicator id="idRate1" maxValue="5" class="sapUiSmallMarginBottom" enabled="false" value="{quesSet>FeedbackRating}"
+													tooltip="Rating Tooltip" change="rate"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
 							</content>
 						</Panel>
 					</CustomListItem>

@@ -124,7 +124,6 @@ sap.ui.define([
 					var quesSet = new JSONModel();
 			quesSet.setData(ques);
 			this.getView().byId(oEvent.getParameters().id).setModel(quesSet, "quesSet");
-
 			}
 			else{
 				continue;

@@ -44,7 +44,7 @@
       "path": "/sap/opu/odata",
       "target": {
         "type": "destination",
-        "name": "TriconLocal",
+        "name": "ZSTUDENT_SRV_0001",
         "entryPath": "/sap/opu/odata"
       },
       "description": "Tricon local gateway"
